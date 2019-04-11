@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import { connect } from 'react-redux'
+import { addTodo } from './actions/add';
 
 class App extends Component {
   state = {
@@ -13,12 +14,19 @@ class App extends Component {
     });
   }
 
+  handleFormSubmit = e => {
+    e.preventDefault()
+    this.props.addTodo(this.state.input)
+
+    this.setState({ input: '' });
+  }
+
   render() {
     return (
-      <form>
+      <form onSubmit={this.handleFormSubmit}>
         <input type="text" onChange={this.handleInputChange} value={this.state.input} />
         <input type="submit" value="Send"/>
-        <ul></ul>
+        <ul>{this.props.todos.map(todo => <li>{todo.value}</li>)}</ul>
       </form>
     );
   }
@@ -28,4 +36,4 @@ const mapStateToProps = state => {
   return { todos: state.todos}
 }
 
-export default connect(mapStateToProps)(App);
+export default connect(mapStateToProps, {addTodo})(App);
