@@ -17,13 +17,13 @@ class App extends Component {
 
   handleFormSubmit = e => {
     e.preventDefault()
-    this.props.addTodo(this.state.input, this.props.todos.length)
+    this.props.addTodo(this.state.input)
 
     this.setState({ input: '' });
   }
 
-  toggle = id => {
-    this.props.toggleTodo(id)
+  toggle = index => {
+    this.props.toggleTodo(index)
   }
 
   render() {
@@ -31,8 +31,7 @@ class App extends Component {
       <form onSubmit={this.handleFormSubmit}>
         <input type="text" onChange={this.handleInputChange} value={this.state.input} />
         <input type="submit" value="Send"/>
-        {/* <ul>{this.props.todos.map(todo => <li onClick={() => this.props.toggleTodo(todo)} key={todo.id}>{todo.value}</li>)}</ul> */}
-        <ul>{this.props.todos.map(todo => <li onClick={() => this.toggle(todo.id)} key={todo.id} className={todo.completed ? 'done' : null}>{todo.value}</li>)}</ul>
+        <ul>{this.props.todos.map((todo, i) => <li onClick={() => this.toggle(i)} key={i} className={todo.completed ? 'done' : null}>{todo.value}</li>)}</ul>
       </form>
     );
   }

@@ -1,9 +1,9 @@
 export const ADD = 'ADD';
 
-export const addTodo = (value, id) => {
+export const addTodo = value => {
   return {
     type: ADD,
-    payload: {id, value, completed: false}
+    value
   }
 
 };

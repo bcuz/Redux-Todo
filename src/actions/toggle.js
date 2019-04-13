@@ -1,10 +1,10 @@
 export const TOGGLE = 'TOGGLE';
 
-export const toggleTodo = id => {
+export const toggleTodo = index => {
   
   return {
     type: TOGGLE,
-    id
+    index
   }
 
 };
